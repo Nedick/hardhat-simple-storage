@@ -9,16 +9,21 @@ async function main() {
     console.log("Deploying contract...");
     const simpleStorage = await SimpleStorageFactory.deploy();
     await simpleStorage.deployed();
-    // what's the private key?
-    // what's the rpc url?
     console.log(`Deployed contract to: ${simpleStorage.address}`);
-    // what happens when we deploy to our hardhat network
-    console.log(network.config);
     if (network.config.chainId === 4 && process.env.ETHERSCAN_API_KEY) {
+        console.log("waiting for block tx...");
         await simpleStorage.deployTransaction.wait(6);
         await verify(simpleStorage.address, []);
-        console.log("Deployed to Rinkeby");
     }
+
+    const currentValue = await simpleStorage.retrieve();
+    console.log(`Current value is: ${currentValue}`);
+
+    // update the current value
+    const transactionResponse = await simpleStorage.store(7);
+    await transactionResponse.wait(1);
+    const updatedValue = await simpleStorage.retrieve();
+    console.log(`Updated value is: ${updatedValue}`);
 }
 
 async function verify(contractAddress, args) {
