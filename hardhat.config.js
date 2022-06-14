@@ -2,6 +2,7 @@ require("@nomiclabs/hardhat-waffle");
 require("dotenv").config();
 require("@nomiclabs/hardhat-etherscan");
 require("./tasks/block-number");
+require("hardhat-gas-reporter");
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -30,5 +31,8 @@ module.exports = {
     solidity: "0.8.7",
     etherscan: {
         apiKey: ETHERSCAN_API_KEY,
+    },
+    gasReporter: {
+        enabled: true,
     },
 };
