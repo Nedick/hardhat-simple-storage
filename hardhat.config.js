@@ -20,7 +20,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  */
 const RINKEBY_RPC_URL = process.env.RINKEBY_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const ETHERSCAN_KEY = process.env.ETHERSCAN_KEY;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_KEY;
 
 module.exports = {
     defaultNetwork: "hardhat",
@@ -33,6 +33,6 @@ module.exports = {
     },
     solidity: "0.8.7",
     etherscan: {
-        apiKey: ETHERSCAN_KEY,
+        apiKey: ETHERSCAN_API_KEY,
     },
 };
